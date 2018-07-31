@@ -1,0 +1,33 @@
+{
+    "name": "git_and_tests",
+    "jest": {
+        "testEnvironment": "node"
+    },
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest",
+        "babel": "babel",
+        "babel-node": "babel-node"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/CyberHedgehog/git_and_tests.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/CyberHedgehog/git_and_tests/issues"
+    },
+    "homepage": "https://github.com/CyberHedgehog/git_and_tests#readme",
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "babel-jest": "^23.4.2",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-stage-0": "^6.24.1",
+        "jest": "^23.4.2",
+        "regenerator-runtime": "^0.12.0"
+    }
+}
