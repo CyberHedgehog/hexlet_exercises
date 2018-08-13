@@ -6,7 +6,7 @@ const destFile = 'test/file2';
 
 const functions = [
     cb => fs.readFile(sourceFile, (err, body) => {
-        cb(err, `${body}/appended`);
+        cb(err, `${body}`);
     }),
     (body, cb) => fs.writeFile(destFile, body, err => {
             cb(err);
