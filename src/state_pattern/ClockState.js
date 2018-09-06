@@ -1,6 +1,8 @@
 class ClockState {
     constructor() {
-        this.stateName = 'Clock';
+        this.hours = 12;
+        this.minutes = 0;
+        this.stateName = 'clock';
     }
 }
 

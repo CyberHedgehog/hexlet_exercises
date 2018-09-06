@@ -5,6 +5,7 @@ import AlarmState from './AlarmState';
 class State {
     constructor() {
         this.setState(ClockState);
+        this.alarmMode = false;
     }
     setState(Klass) {
         this.state = new Klass(this);

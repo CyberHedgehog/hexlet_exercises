@@ -1,12 +1,9 @@
 class AlarmState {
     constructor() {
-        //this.obj = obj;
-        this.alarmH = 0;
-        this.alarmM = 0;
-        this.stateName = 'Alarm';
+        this.hours = 6;
+        this.minutes = 0;
+        this.stateName = 'alarm';
     }
-
-    
 }
 
 export default AlarmState;
