@@ -3,7 +3,7 @@ class BellState {
         this.stateName = 'bell';
     }
 
-
+    
 }
 
 export default BellState;

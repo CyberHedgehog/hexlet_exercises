@@ -1,20 +1,20 @@
 import State from './State';
-import AlarmState from './AlarmState';
-import ClockState from './ClockState';
-import BellState from './BellState';
 
 class AlarmClock extends State {
     constructor() {
         super();
-        this.setState(ClockState);
+    }
+
+    isAlarmOn() {
+        return this.alarmMode ? true: false;
     }
 
     clickMode() {
-        if( this.getCurrentMode() === 'alarm' ) {
-            this.setState(ClockState);
+        if (this.getCurrentMode() === 'clock') {
+            this.changeMode('alarm');
         }
         else {
-            this.setState(AlarmState);
+            this.changeMode('clock');
         }
     }
 
@@ -23,109 +23,55 @@ class AlarmClock extends State {
     }
 
     minutes() {
-        if (this.getStateName() === 'alarm') {
-            this.clickMode();
-            const min = this.state.minutes;
-            this.clickMode();
-            return min;
-        }
-        else {
-            return this.state.minutes;
-        }
+        return this.clock.minutes;
     }
 
     hours() {
-        if (this.getStateName() === 'alarm') {
-            this.clickMode();
-            const h = this.state.hours;
-            this.clickMode();
-            return h
-        }
-        else {
-            return this.state.hours;
-        }
+        return this.clock.hours;
     }
 
     alarmMinutes() {
-        if (this.getStateName() !== 'alarm') {
-            this.clickMode();
-            const min = this.state.minutes;
-            this.clickMode();
-            return min;
-        }
-        else {
-            return this.state.minutes;
-        }
+        return this.alarm.minutes;
     }
 
     alarmHours() {
-        if (this.getStateName() !== 'alarm') {
-            this.clickMode();
-            const h = this.state.hours;
-            this.clickMode();
-            return h;
-        }
-        else {
-            return this.state.hours;
-        }
-    }
-
-    isAlarmOn() {
-        return this.alarmMode;
+        return this.alarm.hours;
     }
 
     clickH() {
-        if (this.hours() === 23) {
-            this.state.hours = 0;
+        if (this.getCurrentMode() === 'bell') {
+            this.changeMode('clock');
         }
-        else {
-            this.state.hours += 1;
-        }
+        this.state.clickH();
     }
 
     clickM() {
-        if (this.minutes() === 59) {
-            this.clickH();
-            this.state.minutes = 0;
+        if (this.getCurrentMode() === 'bell') {
+            this.changeMode('clock');
         }
-        else {
-            this.state.minutes += 1;
-        }
+        this.state.clickM();
     }
 
     isAlarmTime() {
-        if (this.hours() === this.alarmHours() && this.minutes() === this.alarmMinutes) {
-            return true;
-        }
-    }
-
-    getCurrentMode() {
-        return this.getStateName();
+        return this.hours() === this.alarmHours() && this.minutes() === this.alarmMinutes() ? true: false;
     }
 
     tick() {
-        if (this.getCurrentMode() === 'alarm') {
+        if (this.getCurrentMode() !== 'clock') {
             this.clickMode();
             this.clickM();
             this.clickMode();
         }
         else {
+            
             this.clickM();
         }
 
-        if (this.isAlarmTime() && this.isAlarmOn()) {
-            this.setState(BellState);
+        if (this.isAlarmOn() && this.isAlarmTime()) {
+            this.changeMode('bell');
         }
     }
-};
 
-const test = new AlarmClock();
-console.log(`before tick - ${test.getCurrentMode()}`);
-//test.tick();
-test.longClickMode();
-test.tick;
-console.log(test.getCurrentMode());
-
-
+}
 
 export default AlarmClock;

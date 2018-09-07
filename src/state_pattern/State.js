@@ -2,22 +2,28 @@ import BellState from './BellState';
 import ClockState from './ClockState';
 import AlarmState from './AlarmState';
 
+
+
 class State {
     constructor() {
-        this.setState(ClockState);
+        this.bell = new BellState(this);
+        this.clock = new ClockState(this);
+        this.alarm = new AlarmState(this);
+        this.state = this.clock;
         this.alarmMode = false;
     }
-    setState(Klass) {
-        this.state = new Klass(this);
+    
+    getCurrentMode() {
+        return this.state.stateName;
     }
 
-    getStateName() {
-        return this.state.stateName;
+    changeMode(mode) {
+        const states = {'bell': this.bell,
+                'clock': this.clock,
+                'alarm': this.alarm
+            };
+        this.state = states[mode];
     }
 }
 
 export default State;
-
-//const obj = new State();
-//obj.setState(AlarmState);
-//console.log(obj.getName());
